@@ -1,0 +1,5 @@
+rootProject.name = 'simplified-banking'
+include 'domain'
+include 'application'
+include 'infrastructure'
+

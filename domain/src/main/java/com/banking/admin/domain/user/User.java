@@ -1,11 +1,11 @@
 package com.banking.admin.domain.user;
 
+import com.banking.admin.domain.AggregateRoot;
+
 import java.time.Instant;
-import java.util.UUID;
 
-public class User {
+public class User extends AggregateRoot<UserID> {
 
-    private String id;
     private String fistName;
     private String lastName;
     private String document;
@@ -19,30 +19,30 @@ public class User {
     private Instant deleteAt;
 
     public User(
-            final String id,
-            final String fistName,
-            final String lastName,
-            final String document,
-            final String email,
-            final String password,
-            final double balance,
-            final UserType userType,
-            final boolean active,
-            final Instant createdAt,
-            final Instant upadateAt,
-            final Instant deleteAt) {
-        this.id = id;
-        this.fistName = fistName;
-        this.lastName = lastName;
-        this.document = document;
-        this.email = email;
-        this.password = password;
-        this.balance = balance;
-        this.userType = userType;
-        this.active = active;
-        this.createdAt = createdAt;
-        this.upadateAt = upadateAt;
-        this.deleteAt = deleteAt;
+            final UserID anid,
+            final String aFistName,
+            final String aLastName,
+            final String aDocument,
+            final String aEmail,
+            final String aPassword,
+            final double aBalance,
+            final UserType aUserType,
+            final boolean aActive,
+            final Instant aCreatedAt,
+            final Instant aUpadateAt,
+            final Instant aDeleteAt) {
+        super(anid);
+        this.fistName = aFistName;
+        this.lastName = aLastName;
+        this.document = aDocument;
+        this.email = aEmail;
+        this.password = aPassword;
+        this.balance = aBalance;
+        this.userType = aUserType;
+        this.active = aActive;
+        this.createdAt = aCreatedAt;
+        this.upadateAt = aUpadateAt;
+        this.deleteAt = aDeleteAt;
     }
 
     public static User newUser(
@@ -55,12 +55,12 @@ public class User {
             final UserType aUserType,
             final boolean aActive
     ) {
-        final var id = UUID.randomUUID().toString();
+        final var id = UserID.unique();
         final var now = Instant.now();
         return new User(id, aFistName, aLastName, aDocument, aEmail, aPassword, aBalance, aUserType, aActive, now, now, null);
     }
 
-    public String getId() {
+    public UserID getId() {
         return id;
     }
 

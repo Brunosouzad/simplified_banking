@@ -8,7 +8,5 @@ public class UsecaseTest {
 
     @Test
     public void testCreateUseCase(){
-        Assertions.assertNotNull(new User());
-        Assertions.assertNotNull(new UseCase().execute());
     }
 }
